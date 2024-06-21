@@ -1,0 +1,996 @@
+prompt --application/pages/page_00112
+begin
+--   Manifest
+--     PAGE: 00112
+--   Manifest End
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2024.05.31'
+,p_release=>'24.1.0'
+,p_default_workspace_id=>23218690882094214236
+,p_default_application_id=>276360
+,p_default_id_offset=>0
+,p_default_owner=>'WKSP_JUBAYERCSE302SUMMER23'
+);
+wwv_flow_imp_page.create_page(
+ p_id=>112
+,p_name=>'Squads'
+,p_alias=>'SQUADS1'
+,p_step_title=>'Squads'
+,p_allow_duplicate_submissions=>'N'
+,p_reload_on_submit=>'A'
+,p_warn_on_unsaved_changes=>'N'
+,p_autocomplete_on_off=>'ON'
+,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'/* Scroll Results Only in Side Column */',
+'.t-Body-side {',
+'    display: flex;',
+'    flex-direction: column;',
+'    overflow: hidden;',
+'}',
+'.search-results {',
+'    flex: 1;',
+'    overflow: auto;',
+'}',
+'/* Format Search Region */',
+'.search-region {',
+'    border-bottom: 1px solid rgba(0,0,0,.1);',
+'    flex-shrink: 0;',
+'}'))
+,p_step_template=>wwv_flow_imp.id(62248796037713566239)
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+,p_page_component_map=>'18'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(65854534734960289522)
+,p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(62248908156054566287)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_imp.id(62248792319835566236)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_imp.id(62248970657412566315)
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(65854536161742289523)
+,p_plug_name=>'Search'
+,p_region_css_classes=>'search-region padding-md'
+,p_region_template_options=>'#DEFAULT#:t-Form--stretchInputs'
+,p_plug_template=>wwv_flow_imp.id(62248829076046566254)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'REGION_POSITION_02'
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'expand_shortcuts', 'N',
+  'output_as', 'HTML',
+  'show_line_breaks', 'Y')).to_clob
+);
+wwv_flow_imp_page.create_report_region(
+ p_id=>wwv_flow_imp.id(65854536918230289524)
+,p_name=>'Master Records'
+,p_template=>wwv_flow_imp.id(62248830464894566254)
+,p_display_sequence=>20
+,p_region_css_classes=>'search-results'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'t-MediaList--showDesc:t-MediaList--stack'
+,p_display_point=>'REGION_POSITION_02'
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_query_type=>'SQL'
+,p_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select "TEAM_NAME",',
+'    null LINK_CLASS,',
+'    apex_page.get_url(p_items => ''P112_TEAM_NAME'', p_values => "TEAM_NAME") LINK,',
+'    null ICON_CLASS,',
+'    null LINK_ATTR,',
+'    null ICON_COLOR_CLASS,',
+'    case when coalesce(:P112_TEAM_NAME,''0'') = "TEAM_NAME"',
+'      then ''is-active'' ',
+'      else '' ''',
+'    end LIST_CLASS,',
+'    (substr("TEAM_NAME", 1, 50)||( case when length("TEAM_NAME") > 50 then ''...'' else '''' end )) LIST_TITLE,',
+'    (substr("FILE_NAME", 1, 50)||( case when length("FILE_NAME") > 50 then ''...'' else '''' end )) LIST_TEXT,',
+'    null LIST_BADGE',
+'from "TEAMS" x',
+'where (:P112_SEARCH is null',
+'        or upper(x."TEAM_NAME") like ''%''||upper(:P112_SEARCH)||''%''',
+'        or upper(x."FILE_NAME") like ''%''||upper(:P112_SEARCH)||''%''',
+'    )',
+'order by "TEAM_NAME"'))
+,p_ajax_enabled=>'Y'
+,p_ajax_items_to_submit=>'P112_SEARCH'
+,p_lazy_loading=>false
+,p_query_row_template=>wwv_flow_imp.id(62248930869543566296)
+,p_query_num_rows=>1000
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'<div class="u-tC">No data found.</div>'
+,p_query_row_count_max=>500
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854537635231289527)
+,p_query_column_id=>1
+,p_column_alias=>'TEAM_NAME'
+,p_column_display_sequence=>1
+,p_column_heading=>'TEAM_NAME'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854538052250289527)
+,p_query_column_id=>2
+,p_column_alias=>'LINK_CLASS'
+,p_column_display_sequence=>2
+,p_column_heading=>'LINK_CLASS'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854538417853289528)
+,p_query_column_id=>3
+,p_column_alias=>'LINK'
+,p_column_display_sequence=>3
+,p_column_heading=>'LINK'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854538815663289528)
+,p_query_column_id=>4
+,p_column_alias=>'ICON_CLASS'
+,p_column_display_sequence=>4
+,p_column_heading=>'ICON_CLASS'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854539296386289528)
+,p_query_column_id=>5
+,p_column_alias=>'LINK_ATTR'
+,p_column_display_sequence=>5
+,p_column_heading=>'LINK_ATTR'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854539635826289528)
+,p_query_column_id=>6
+,p_column_alias=>'ICON_COLOR_CLASS'
+,p_column_display_sequence=>6
+,p_column_heading=>'ICON_COLOR_CLASS'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854540017776289529)
+,p_query_column_id=>7
+,p_column_alias=>'LIST_CLASS'
+,p_column_display_sequence=>7
+,p_column_heading=>'LIST_CLASS'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854540402085289529)
+,p_query_column_id=>8
+,p_column_alias=>'LIST_TITLE'
+,p_column_display_sequence=>8
+,p_column_heading=>'LIST_TITLE'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854540885877289529)
+,p_query_column_id=>9
+,p_column_alias=>'LIST_TEXT'
+,p_column_display_sequence=>9
+,p_column_heading=>'LIST_TEXT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854541274434289529)
+,p_query_column_id=>10
+,p_column_alias=>'LIST_BADGE'
+,p_column_display_sequence=>10
+,p_column_heading=>'LIST_BADGE'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(65854550248983289711)
+,p_plug_name=>'Teams'
+,p_region_css_classes=>'js-master-region'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(62248885965786566278)
+,p_plug_display_sequence=>10
+,p_query_type=>'TABLE'
+,p_query_table=>'TEAMS'
+,p_query_where=>'"TEAM_NAME" = :P112_TEAM_NAME'
+,p_include_rowid_column=>false
+,p_plug_source_type=>'NATIVE_IR'
+,p_plug_display_condition_type=>'ITEM_IS_NOT_NULL'
+,p_plug_display_when_condition=>'P112_TEAM_NAME'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header=>'Teams'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#EEEEEE'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'bold'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#FFFFFF'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+,p_prn_border_color=>'#666666'
+);
+wwv_flow_imp_page.create_worksheet(
+ p_id=>wwv_flow_imp.id(65664052742382081048)
+,p_max_row_count=>'1000000'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_lazy_loading=>false
+,p_show_detail_link=>'N'
+,p_show_notify=>'Y'
+,p_download_formats=>'CSV:HTML:XLSX:PDF'
+,p_enable_mail_download=>'Y'
+,p_owner=>'LIKHON'
+,p_internal_uid=>65664052742382081048
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(65664052821930081049)
+,p_db_column_name=>'TEAM_NAME'
+,p_display_order=>10
+,p_is_primary_key=>'Y'
+,p_column_identifier=>'A'
+,p_column_label=>'Team Name'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(65664052995146081050)
+,p_db_column_name=>'BUDGET'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Budget'
+,p_column_type=>'NUMBER'
+,p_heading_alignment=>'RIGHT'
+,p_column_alignment=>'RIGHT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(65867429115940484401)
+,p_db_column_name=>'FLAG'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'Flag'
+,p_column_type=>'OTHER'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(65867429295556484402)
+,p_db_column_name=>'FILE_NAME'
+,p_display_order=>40
+,p_column_identifier=>'D'
+,p_column_label=>'File Name'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(65867429372624484403)
+,p_db_column_name=>'MIME_TYPE'
+,p_display_order=>50
+,p_column_identifier=>'E'
+,p_column_label=>'Mime Type'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(65867429469617484404)
+,p_db_column_name=>'UPDATE_DATE'
+,p_display_order=>60
+,p_column_identifier=>'F'
+,p_column_label=>'Update Date'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(65867429536300484405)
+,p_db_column_name=>'CHARACTER_SET'
+,p_display_order=>70
+,p_column_identifier=>'G'
+,p_column_label=>'Character Set'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(65867429679917484406)
+,p_db_column_name=>'STAGE_STAGEID'
+,p_display_order=>80
+,p_column_identifier=>'H'
+,p_column_label=>'Stage Stageid'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(65867485290659491268)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'658674853'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'TEAM_NAME:BUDGET:FLAG:FILE_NAME:MIME_TYPE:UPDATE_DATE:CHARACTER_SET:STAGE_STAGEID'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(65854559597070289719)
+,p_plug_name=>'Region Display Selector'
+,p_region_css_classes=>'js-detail-rds'
+,p_region_template_options=>'#DEFAULT#:margin-bottom-md'
+,p_escape_on_http_output=>'Y'
+,p_plug_template=>wwv_flow_imp.id(62248829076046566254)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_query_type=>'SQL'
+,p_plug_source_type=>'NATIVE_DISPLAY_SELECTOR'
+,p_plug_query_num_rows=>15
+,p_plug_display_condition_type=>'ITEM_IS_NOT_NULL'
+,p_plug_display_when_condition=>'P112_TEAM_NAME'
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'display_region_icons', 'N',
+  'include_show_all', 'Y',
+  'rds_mode', 'STANDARD',
+  'remember_selection', 'N')).to_clob
+);
+wwv_flow_imp_page.create_report_region(
+ p_id=>wwv_flow_imp.id(65854559983427289719)
+,p_name=>'Players'
+,p_template=>wwv_flow_imp.id(62248895744232566282)
+,p_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_region_css_classes=>'js-detail-region'
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--scrollBody'
+,p_component_template_options=>'t-Report--stretch:#DEFAULT#:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--inline'
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_query_type=>'TABLE'
+,p_query_table=>'PLAYERS'
+,p_query_where=>'"TEAMS_TEAM_NAME" = :P112_TEAM_NAME'
+,p_include_rowid_column=>true
+,p_display_when_condition=>'P112_TEAM_NAME'
+,p_display_condition_type=>'ITEM_IS_NOT_NULL'
+,p_ajax_enabled=>'Y'
+,p_lazy_loading=>false
+,p_query_row_template=>wwv_flow_imp.id(62248934027130566298)
+,p_query_num_rows=>100
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_num_rows_type=>'NEXT_PREVIOUS_LINKS'
+,p_query_row_count_max=>5000
+,p_pagination_display_position=>'BOTTOM_RIGHT'
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854560603981289809)
+,p_query_column_id=>1
+,p_column_alias=>'ROWID'
+,p_column_display_sequence=>1
+,p_column_heading=>'<span class="u-VisuallyHidden">Edit</span>'
+,p_use_as_row_header=>'N'
+,p_column_link=>'f?p=&APP_ID.:114:&APP_SESSION.::&DEBUG.:RP:P114_ROWID:#ROWID#'
+,p_column_linktext=>'<span role="img" aria-label="Edit"><span class="fa fa-edit" aria-hidden="true" title="Edit"></span></span>'
+,p_heading_alignment=>'LEFT'
+,p_report_column_required_role=>wwv_flow_imp.id(62249080414988566370)
+,p_report_column_width=>32
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854561014620289810)
+,p_query_column_id=>2
+,p_column_alias=>'PLAYER_ID'
+,p_column_display_sequence=>2
+,p_column_heading=>'Player Id'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854561489558289810)
+,p_query_column_id=>3
+,p_column_alias=>'NAME'
+,p_column_display_sequence=>3
+,p_column_heading=>'Name'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854561823339289810)
+,p_query_column_id=>4
+,p_column_alias=>'PLAYER_TYPE'
+,p_column_display_sequence=>4
+,p_column_heading=>'Player Type'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854562203170289810)
+,p_query_column_id=>5
+,p_column_alias=>'AGE'
+,p_column_display_sequence=>5
+,p_column_heading=>'Age'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854562695396289810)
+,p_query_column_id=>6
+,p_column_alias=>'PLAYER_IMAGE'
+,p_column_display_sequence=>6
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854563024207289811)
+,p_query_column_id=>7
+,p_column_alias=>'JERSEY_NO'
+,p_column_display_sequence=>7
+,p_column_heading=>'Jersey No'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854563434973289811)
+,p_query_column_id=>8
+,p_column_alias=>'NATIONALITY'
+,p_column_display_sequence=>8
+,p_column_heading=>'Nationality'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854563832350289811)
+,p_query_column_id=>9
+,p_column_alias=>'FILE_NAME'
+,p_column_display_sequence=>9
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854564278019289811)
+,p_query_column_id=>10
+,p_column_alias=>'MIME_TYPE'
+,p_column_display_sequence=>10
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854564611053289812)
+,p_query_column_id=>11
+,p_column_alias=>'UPDATE_DATE'
+,p_column_display_sequence=>11
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854565051243289812)
+,p_query_column_id=>12
+,p_column_alias=>'CHARACTER_SET'
+,p_column_display_sequence=>12
+,p_hidden_column=>'Y'
+,p_derived_column=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854565486838289812)
+,p_query_column_id=>13
+,p_column_alias=>'TEAMS_TEAM_NAME'
+,p_column_display_sequence=>13
+,p_column_heading=>'Teams Team Name'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_hidden_column=>'Y'
+);
+wwv_flow_imp_page.create_report_region(
+ p_id=>wwv_flow_imp.id(65854586597725289839)
+,p_name=>'Matches'
+,p_template=>wwv_flow_imp.id(62248895744232566282)
+,p_display_sequence=>40
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_region_css_classes=>'js-detail-region'
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--scrollBody'
+,p_component_template_options=>'t-Report--stretch:#DEFAULT#:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--inline'
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_query_type=>'TABLE'
+,p_query_table=>'MATCHES'
+,p_query_where=>'"TEAMB" = :P112_TEAM_NAME OR "TEAMA" = :P112_TEAM_NAME'
+,p_include_rowid_column=>true
+,p_display_when_condition=>'P112_TEAM_NAME'
+,p_display_condition_type=>'ITEM_IS_NOT_NULL'
+,p_ajax_enabled=>'Y'
+,p_lazy_loading=>false
+,p_query_row_template=>wwv_flow_imp.id(62248934027130566298)
+,p_query_num_rows=>100
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_num_rows_type=>'NEXT_PREVIOUS_LINKS'
+,p_query_row_count_max=>5000
+,p_pagination_display_position=>'BOTTOM_RIGHT'
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854587280511289930)
+,p_query_column_id=>1
+,p_column_alias=>'ROWID'
+,p_column_display_sequence=>1
+,p_column_heading=>'<span class="u-VisuallyHidden">Edit</span>'
+,p_use_as_row_header=>'N'
+,p_column_link=>'f?p=&APP_ID.:115:&APP_SESSION.::&DEBUG.:RP:P115_ROWID:#ROWID#'
+,p_column_linktext=>'<span role="img" aria-label="Edit"><span class="fa fa-edit" aria-hidden="true" title="Edit"></span></span>'
+,p_heading_alignment=>'LEFT'
+,p_report_column_required_role=>wwv_flow_imp.id(62249080414988566370)
+,p_report_column_width=>32
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854587696154289930)
+,p_query_column_id=>2
+,p_column_alias=>'MATCH_ID'
+,p_column_display_sequence=>2
+,p_column_heading=>'Match Id'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854588072570289930)
+,p_query_column_id=>3
+,p_column_alias=>'Date'
+,p_column_display_sequence=>3
+,p_column_heading=>'Date'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854588413102289930)
+,p_query_column_id=>4
+,p_column_alias=>'TIME'
+,p_column_display_sequence=>4
+,p_column_heading=>'Time'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854588834682289931)
+,p_query_column_id=>5
+,p_column_alias=>'VENUES_VENUENAME'
+,p_column_display_sequence=>5
+,p_column_heading=>'Venues Name'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854589213369289931)
+,p_query_column_id=>6
+,p_column_alias=>'TEAMA'
+,p_column_display_sequence=>6
+,p_column_heading=>'Team A'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854589614267289931)
+,p_query_column_id=>7
+,p_column_alias=>'TEAMB'
+,p_column_display_sequence=>7
+,p_column_heading=>'Team B'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_disable_sort_column=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_region(
+ p_id=>wwv_flow_imp.id(65854604687708289951)
+,p_name=>'Standings'
+,p_template=>wwv_flow_imp.id(62248895744232566282)
+,p_display_sequence=>50
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_region_css_classes=>'js-detail-region'
+,p_region_template_options=>'#DEFAULT#:t-Region--noPadding:t-Region--scrollBody'
+,p_component_template_options=>'t-Report--stretch:#DEFAULT#:t-Report--altRowsDefault:t-Report--rowHighlight:t-Report--inline'
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_query_type=>'TABLE'
+,p_query_table=>'STANDINGS'
+,p_query_where=>'"TEAMS_TEAM_NAME" = :P112_TEAM_NAME'
+,p_include_rowid_column=>true
+,p_display_when_condition=>'P112_TEAM_NAME'
+,p_display_condition_type=>'ITEM_IS_NOT_NULL'
+,p_ajax_enabled=>'Y'
+,p_lazy_loading=>false
+,p_query_row_template=>wwv_flow_imp.id(62248934027130566298)
+,p_query_num_rows=>100
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_query_no_data_found=>'No data found.'
+,p_query_num_rows_type=>'NEXT_PREVIOUS_LINKS'
+,p_query_row_count_max=>5000
+,p_pagination_display_position=>'BOTTOM_RIGHT'
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854605706065290048)
+,p_query_column_id=>1
+,p_column_alias=>'ROWID'
+,p_column_display_sequence=>1
+,p_column_heading=>'<span class="u-VisuallyHidden">Edit</span>'
+,p_use_as_row_header=>'N'
+,p_column_link=>'f?p=&APP_ID.:116:&APP_SESSION.::&DEBUG.:RP:P116_ROWID:#ROWID#'
+,p_column_linktext=>'<span role="img" aria-label="Edit"><span class="fa fa-edit" aria-hidden="true" title="Edit"></span></span>'
+,p_heading_alignment=>'LEFT'
+,p_report_column_required_role=>wwv_flow_imp.id(62249080414988566370)
+,p_report_column_width=>32
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854606184846290049)
+,p_query_column_id=>2
+,p_column_alias=>'PLAYED'
+,p_column_display_sequence=>2
+,p_column_heading=>'Played'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854606599669290049)
+,p_query_column_id=>3
+,p_column_alias=>'WON'
+,p_column_display_sequence=>3
+,p_column_heading=>'Won'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854606954321290049)
+,p_query_column_id=>4
+,p_column_alias=>'LOST'
+,p_column_display_sequence=>4
+,p_column_heading=>'Lost'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854607389006290049)
+,p_query_column_id=>5
+,p_column_alias=>'NR'
+,p_column_display_sequence=>5
+,p_column_heading=>'N/R'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854607705285290049)
+,p_query_column_id=>6
+,p_column_alias=>'TIED'
+,p_column_display_sequence=>6
+,p_column_heading=>'Tied'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854608162539290050)
+,p_query_column_id=>7
+,p_column_alias=>'NET_RR'
+,p_column_display_sequence=>7
+,p_column_heading=>'Net RR'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854608504888290050)
+,p_query_column_id=>8
+,p_column_alias=>'POINT'
+,p_column_display_sequence=>8
+,p_column_heading=>'Point'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(65854608996610290050)
+,p_query_column_id=>9
+,p_column_alias=>'TEAMS_TEAM_NAME'
+,p_column_display_sequence=>9
+,p_column_heading=>'Teams Team Name'
+,p_use_as_row_header=>'N'
+,p_heading_alignment=>'LEFT'
+,p_hidden_column=>'Y'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(65854570465406289816)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(65854559983427289719)
+,p_button_name=>'POP_PLAYERS'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--noUI'
+,p_button_template_id=>wwv_flow_imp.id(62248968336320566313)
+,p_button_image_alt=>'Add Players'
+,p_button_position=>'EDIT'
+,p_button_redirect_url=>'f?p=&APP_ID.:114:&APP_SESSION.::&DEBUG.:RP,114:P114_TEAMS_TEAM_NAME:&P112_TEAM_NAME.'
+,p_icon_css_classes=>'fa-plus'
+,p_security_scheme=>wwv_flow_imp.id(62249080414988566370)
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(65854592812667289933)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(65854586597725289839)
+,p_button_name=>'POP_MATCHES'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--noUI'
+,p_button_template_id=>wwv_flow_imp.id(62248968336320566313)
+,p_button_image_alt=>'Add Matches'
+,p_button_position=>'EDIT'
+,p_button_redirect_url=>'f?p=&APP_ID.:115:&APP_SESSION.::&DEBUG.:RP,115:P115_TEAMB:&P112_TEAM_NAME.'
+,p_icon_css_classes=>'fa-plus'
+,p_security_scheme=>wwv_flow_imp.id(62249080414988566370)
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(65854612700177290053)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(65854604687708289951)
+,p_button_name=>'POP_STANDINGS'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--noUI'
+,p_button_template_id=>wwv_flow_imp.id(62248968336320566313)
+,p_button_image_alt=>'Add Standings'
+,p_button_position=>'EDIT'
+,p_button_redirect_url=>'f?p=&APP_ID.:116:&APP_SESSION.::&DEBUG.:RP,116:P116_TEAMS_TEAM_NAME:&P112_TEAM_NAME.'
+,p_icon_css_classes=>'fa-plus'
+,p_security_scheme=>wwv_flow_imp.id(62249080414988566370)
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(65854639257845290182)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(65854550248983289711)
+,p_button_name=>'EDIT'
+,p_button_static_id=>'edit_master_btn'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--noUI:t-Button--iconLeft'
+,p_button_template_id=>wwv_flow_imp.id(62248969187955566314)
+,p_button_image_alt=>'Edit'
+,p_button_position=>'EDIT'
+,p_button_redirect_url=>'f?p=&APP_ID.:113:&APP_SESSION.::&DEBUG.:RP,113:P113_TEAM_NAME:&P112_TEAM_NAME.'
+,p_icon_css_classes=>'fa-pencil-square-o'
+,p_grid_new_row=>'Y'
+,p_security_scheme=>wwv_flow_imp.id(62249080414988566370)
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(65854535480712289523)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(65854534734960289522)
+,p_button_name=>'RESET'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--noUI:t-Button--iconLeft:t-Button--gapRight'
+,p_button_template_id=>wwv_flow_imp.id(62248969187955566314)
+,p_button_image_alt=>'Reset'
+,p_button_position=>'NEXT'
+,p_button_alignment=>'RIGHT'
+,p_button_redirect_url=>'f?p=&APP_ID.:112:&APP_SESSION.:RESET:&DEBUG.:RP,112::'
+,p_icon_css_classes=>'fa-undo-alt'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(65854535898584289523)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(65854534734960289522)
+,p_button_name=>'CREATE'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--iconLeft'
+,p_button_template_id=>wwv_flow_imp.id(62248969187955566314)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Create'
+,p_button_position=>'NEXT'
+,p_button_redirect_url=>'f?p=&APP_ID.:113:&APP_SESSION.::&DEBUG.:RP,113::'
+,p_icon_css_classes=>'fa-plus'
+,p_security_scheme=>wwv_flow_imp.id(62249080414988566370)
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(65854536638022289524)
+,p_name=>'P112_SEARCH'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(65854536161742289523)
+,p_prompt=>'Search'
+,p_placeholder=>'Search...'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_imp.id(62248966280186566312)
+,p_item_icon_css_classes=>'fa-search'
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--large:t-Form-fieldContainer--postTextBlock'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_03=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(65854559253253289718)
+,p_name=>'P112_TEAM_NAME'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(65854550248983289711)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_protection_level=>'S'
+,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(65854639584296290182)
+,p_name=>'Dialog Closed'
+,p_event_sequence=>10
+,p_triggering_element_type=>'REGION'
+,p_triggering_region_id=>wwv_flow_imp.id(65854550248983289711)
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'apexafterclosedialog'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854640108972290182)
+,p_event_id=>wwv_flow_imp.id(65854639584296290182)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(65854550248983289711)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854640675396290182)
+,p_event_id=>wwv_flow_imp.id(65854639584296290182)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'apex.message.showPageSuccess(''Teams row(s) updated.'');'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(65854560085711289719)
+,p_name=>'Dialog Closed'
+,p_event_sequence=>40
+,p_triggering_element_type=>'REGION'
+,p_triggering_region_id=>wwv_flow_imp.id(65854559983427289719)
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'apexafterclosedialog'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854571118583289816)
+,p_event_id=>wwv_flow_imp.id(65854560085711289719)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(65854559983427289719)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854571660882289816)
+,p_event_id=>wwv_flow_imp.id(65854560085711289719)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'apex.message.showPageSuccess(''Players row(s) updated.'');'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(65854586621928289839)
+,p_name=>'Dialog Closed'
+,p_event_sequence=>40
+,p_triggering_element_type=>'REGION'
+,p_triggering_region_id=>wwv_flow_imp.id(65854586597725289839)
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'apexafterclosedialog'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854593549964289933)
+,p_event_id=>wwv_flow_imp.id(65854586621928289839)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(65854586597725289839)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854594060571289934)
+,p_event_id=>wwv_flow_imp.id(65854586621928289839)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'apex.message.showPageSuccess(''Matches row(s) updated.'');'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(65854604708352289951)
+,p_name=>'Dialog Closed'
+,p_event_sequence=>40
+,p_triggering_element_type=>'REGION'
+,p_triggering_region_id=>wwv_flow_imp.id(65854604687708289951)
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'apexafterclosedialog'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854613411591290053)
+,p_event_id=>wwv_flow_imp.id(65854604708352289951)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(65854604687708289951)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854613928872290053)
+,p_event_id=>wwv_flow_imp.id(65854604708352289951)
+,p_event_result=>'TRUE'
+,p_action_sequence=>20
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'apex.message.showPageSuccess(''Standings row(s) updated.'');'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(65854639604712290182)
+,p_name=>'Perform Search'
+,p_event_sequence=>150
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P112_SEARCH'
+,p_triggering_condition_type=>'JAVASCRIPT_EXPRESSION'
+,p_triggering_expression=>'this.browserEvent.which === apex.jQuery.ui.keyCode.ENTER'
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'keypress'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854641449213290183)
+,p_event_id=>wwv_flow_imp.id(65854639604712290182)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(65854536918230289524)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(65854641943572290183)
+,p_event_id=>wwv_flow_imp.id(65854639604712290182)
+,p_event_result=>'TRUE'
+,p_action_sequence=>30
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_CANCEL_EVENT'
+);
+wwv_flow_imp.component_end;
+end;
+/
