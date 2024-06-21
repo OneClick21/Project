@@ -1,0 +1,568 @@
+prompt --application/pages/page_00010
+begin
+--   Manifest
+--     PAGE: 00010
+--   Manifest End
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2024.05.31'
+,p_release=>'24.1.0'
+,p_default_workspace_id=>23218690882094214236
+,p_default_application_id=>172091
+,p_default_id_offset=>0
+,p_default_owner=>'WKSP_JUBAYERCSE302SUMMER23'
+);
+wwv_flow_imp_page.create_page(
+ p_id=>10
+,p_name=>'Requests'
+,p_alias=>'REQUESTS'
+,p_step_title=>'Requests'
+,p_autocomplete_on_off=>'OFF'
+,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'#bg{',
+'background-image: url(#APP_FILES#7.jpg);',
+'width: 100%; ',
+'height: 850px;',
+'background-size:cover;',
+'background-repeat: no-repeat;',
+'}'))
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+,p_page_component_map=>'18'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(31046856400196443807)
+,p_plug_name=>'Breadcrumb'
+,p_region_name=>'bg'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader js-removeLandmark:t-Region--scrollBody'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(3435354875481628565)
+,p_plug_display_sequence=>30
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_location=>null
+,p_menu_id=>wwv_flow_imp.id(3435251497716628514)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_imp.id(3435829629533628603)
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(31046857178527443808)
+,p_plug_name=>'Requests'
+,p_parent_plug_id=>wwv_flow_imp.id(31046856400196443807)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(3435345079399628558)
+,p_plug_display_sequence=>20
+,p_query_type=>'SQL'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select REQUESTID,',
+'       BLOOD_TYPE,',
+'       REQUEST_DATE,',
+'       REQUESTSTATUS,',
+'       MEDICAL_CONDITION,',
+'       HOSPITAL_NAME,',
+'       SIGN_UP_ID,',
+'       SIGN_UP_USERNAME,',
+'       Null as Accept_Request',
+'  from BLOOD_REQUEST',
+' where SIGN_UP_USERNAME != APEX_CUSTOM_AUTH.GET_USERNAME',
+' and blood_type = (select bloodtype from sign_up',
+' where USERNAME = APEX_CUSTOM_AUTH.GET_USERNAME)'))
+,p_plug_source_type=>'NATIVE_IG'
+,p_prn_page_header=>'Requests'
+,p_plug_header=>'<h3><b>MY Match</b></h3>'
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974122481543900739)
+,p_name=>'REQUESTID'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'REQUESTID'
+,p_data_type=>'NUMBER'
+,p_session_state_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_HIDDEN'
+,p_display_sequence=>10
+,p_attribute_01=>'Y'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>false
+,p_is_primary_key=>true
+,p_duplicate_value=>true
+,p_include_in_export=>false
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974122519744900740)
+,p_name=>'BLOOD_TYPE'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'BLOOD_TYPE'
+,p_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_TEXT_FIELD'
+,p_heading=>'Blood Type'
+,p_heading_alignment=>'LEFT'
+,p_display_sequence=>20
+,p_value_alignment=>'LEFT'
+,p_attribute_05=>'BOTH'
+,p_is_required=>true
+,p_max_length=>3
+,p_enable_filter=>true
+,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
+,p_filter_is_required=>false
+,p_filter_text_case=>'MIXED'
+,p_filter_exact_match=>true
+,p_filter_lov_type=>'DISTINCT'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>true
+,p_enable_control_break=>true
+,p_enable_hide=>true
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>true
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974122684448900741)
+,p_name=>'REQUEST_DATE'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'REQUEST_DATE'
+,p_data_type=>'DATE'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_DATE_PICKER_APEX'
+,p_heading=>'Request Date'
+,p_heading_alignment=>'LEFT'
+,p_display_sequence=>30
+,p_value_alignment=>'LEFT'
+,p_attribute_01=>'N'
+,p_attribute_02=>'POPUP'
+,p_attribute_03=>'NONE'
+,p_attribute_06=>'NONE'
+,p_attribute_09=>'N'
+,p_attribute_11=>'Y'
+,p_is_required=>true
+,p_enable_filter=>true
+,p_filter_is_required=>false
+,p_filter_date_ranges=>'ALL'
+,p_filter_lov_type=>'DISTINCT'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>true
+,p_enable_control_break=>true
+,p_enable_hide=>true
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>true
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974122756982900742)
+,p_name=>'REQUESTSTATUS'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'REQUESTSTATUS'
+,p_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_TEXT_FIELD'
+,p_heading=>'Requeststatus'
+,p_heading_alignment=>'LEFT'
+,p_display_sequence=>40
+,p_value_alignment=>'LEFT'
+,p_attribute_05=>'BOTH'
+,p_is_required=>false
+,p_max_length=>15
+,p_enable_filter=>true
+,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
+,p_filter_is_required=>false
+,p_filter_text_case=>'MIXED'
+,p_filter_exact_match=>true
+,p_filter_lov_type=>'DISTINCT'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>true
+,p_enable_control_break=>true
+,p_enable_hide=>true
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>true
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974122850757900743)
+,p_name=>'MEDICAL_CONDITION'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'MEDICAL_CONDITION'
+,p_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_TEXT_FIELD'
+,p_heading=>'Medical Condition'
+,p_heading_alignment=>'LEFT'
+,p_display_sequence=>50
+,p_value_alignment=>'LEFT'
+,p_attribute_05=>'BOTH'
+,p_is_required=>false
+,p_max_length=>100
+,p_enable_filter=>true
+,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
+,p_filter_is_required=>false
+,p_filter_text_case=>'MIXED'
+,p_filter_exact_match=>true
+,p_filter_lov_type=>'DISTINCT'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>true
+,p_enable_control_break=>true
+,p_enable_hide=>true
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>true
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974122985033900744)
+,p_name=>'HOSPITAL_NAME'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'HOSPITAL_NAME'
+,p_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_TEXT_FIELD'
+,p_heading=>'Hospital Name'
+,p_heading_alignment=>'LEFT'
+,p_display_sequence=>60
+,p_value_alignment=>'LEFT'
+,p_attribute_05=>'BOTH'
+,p_is_required=>true
+,p_max_length=>150
+,p_enable_filter=>true
+,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
+,p_filter_is_required=>false
+,p_filter_text_case=>'MIXED'
+,p_filter_exact_match=>true
+,p_filter_lov_type=>'DISTINCT'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>true
+,p_enable_control_break=>true
+,p_enable_hide=>true
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>true
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974123060926900745)
+,p_name=>'SIGN_UP_ID'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'SIGN_UP_ID'
+,p_data_type=>'NUMBER'
+,p_session_state_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_HIDDEN'
+,p_display_sequence=>70
+,p_attribute_01=>'Y'
+,p_filter_is_required=>false
+,p_use_as_row_header=>false
+,p_enable_sort_group=>false
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>false
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974123166961900746)
+,p_name=>'SIGN_UP_USERNAME'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'SIGN_UP_USERNAME'
+,p_data_type=>'VARCHAR2'
+,p_session_state_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_HIDDEN'
+,p_display_sequence=>80
+,p_attribute_01=>'Y'
+,p_filter_is_required=>false
+,p_use_as_row_header=>false
+,p_enable_sort_group=>false
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>false
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(16974123320578900748)
+,p_name=>'ACCEPT_REQUEST'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'ACCEPT_REQUEST'
+,p_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_LINK'
+,p_heading=>'Accept Request'
+,p_heading_alignment=>'LEFT'
+,p_display_sequence=>90
+,p_value_alignment=>'LEFT'
+,p_link_target=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::P11_BLOOD_REQUEST_REQUESTID:&REQUESTID.'
+,p_link_text=>'<button type="button" class="t-Button t-Button--large t-Button--success">Accept</button>'
+,p_enable_filter=>true
+,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
+,p_filter_is_required=>false
+,p_filter_text_case=>'MIXED'
+,p_filter_exact_match=>true
+,p_filter_lov_type=>'DISTINCT'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>true
+,p_enable_control_break=>true
+,p_enable_hide=>true
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>true
+,p_escape_on_http_output=>true
+);
+wwv_flow_imp_page.create_interactive_grid(
+ p_id=>wwv_flow_imp.id(31046857641000443809)
+,p_internal_uid=>31046857641000443809
+,p_is_editable=>false
+,p_lazy_loading=>false
+,p_requires_filter=>false
+,p_select_first_row=>true
+,p_fixed_row_height=>true
+,p_pagination_type=>'SCROLL'
+,p_show_total_row_count=>true
+,p_show_toolbar=>false
+,p_toolbar_buttons=>null
+,p_enable_save_public_report=>false
+,p_enable_subscriptions=>true
+,p_enable_flashback=>true
+,p_define_chart_view=>true
+,p_enable_download=>true
+,p_enable_mail_download=>true
+,p_fixed_header=>'PAGE'
+,p_show_icon_view=>false
+,p_show_detail_view=>false
+);
+wwv_flow_imp_page.create_ig_report(
+ p_id=>wwv_flow_imp.id(31046858053743443809)
+,p_interactive_grid_id=>wwv_flow_imp.id(31046857641000443809)
+,p_static_id=>'310468581'
+,p_type=>'PRIMARY'
+,p_default_view=>'GRID'
+,p_show_row_number=>false
+,p_settings_area_expanded=>true
+);
+wwv_flow_imp_page.create_ig_report_view(
+ p_id=>wwv_flow_imp.id(31046858220873443809)
+,p_report_id=>wwv_flow_imp.id(31046858053743443809)
+,p_view_type=>'GRID'
+,p_srv_exclude_null_values=>false
+,p_srv_only_display_columns=>true
+,p_edit_mode=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31047083296355137849)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>4
+,p_column_id=>wwv_flow_imp.id(16974122481543900739)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31047084189657137852)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>5
+,p_column_id=>wwv_flow_imp.id(16974122519744900740)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31047085082230137855)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>6
+,p_column_id=>wwv_flow_imp.id(16974122684448900741)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31047085933567137857)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>7
+,p_column_id=>wwv_flow_imp.id(16974122756982900742)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31047086839474137859)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>8
+,p_column_id=>wwv_flow_imp.id(16974122850757900743)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31047087765116137862)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>9
+,p_column_id=>wwv_flow_imp.id(16974122985033900744)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31047088605992137864)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>10
+,p_column_id=>wwv_flow_imp.id(16974123060926900745)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31047089506792137866)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>11
+,p_column_id=>wwv_flow_imp.id(16974123166961900746)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(31050348867694500577)
+,p_view_id=>wwv_flow_imp.id(31046858220873443809)
+,p_display_seq=>13
+,p_column_id=>wwv_flow_imp.id(16974123320578900748)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(41531278725947838507)
+,p_plug_name=>'All Requests'
+,p_parent_plug_id=>wwv_flow_imp.id(31046856400196443807)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(3435345079399628558)
+,p_plug_display_sequence=>30
+,p_query_type=>'SQL'
+,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'select REQUESTID,',
+'       BLOOD_TYPE,',
+'       REQUEST_DATE,',
+'       REQUESTSTATUS,',
+'       MEDICAL_CONDITION,',
+'       HOSPITAL_NAME,',
+'       SIGN_UP_ID,',
+'       SIGN_UP_USERNAME',
+'  from BLOOD_REQUEST',
+' where SIGN_UP_USERNAME != APEX_CUSTOM_AUTH.GET_USERNAME',
+' and blood_type != (select bloodtype from sign_up',
+' where USERNAME = APEX_CUSTOM_AUTH.GET_USERNAME)'))
+,p_plug_source_type=>'NATIVE_IR'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header=>'All Requests'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#EEEEEE'
+,p_prn_header_font_color=>'#000000'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'bold'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#FFFFFF'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
+,p_prn_border_color=>'#666666'
+,p_plug_header=>'<h3><b>Other Requests</b></h3>'
+);
+wwv_flow_imp_page.create_worksheet(
+ p_id=>wwv_flow_imp.id(41531279634311838516)
+,p_max_row_count=>'1000000'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_lazy_loading=>false
+,p_show_detail_link=>'N'
+,p_show_notify=>'Y'
+,p_download_formats=>'CSV:HTML:XLSX:PDF'
+,p_enable_mail_download=>'Y'
+,p_owner=>'LIKHON'
+,p_internal_uid=>41531279634311838516
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(41531279747276838517)
+,p_db_column_name=>'REQUESTID'
+,p_display_order=>10
+,p_column_identifier=>'A'
+,p_column_label=>'Requestid'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(41531279841316838518)
+,p_db_column_name=>'BLOOD_TYPE'
+,p_display_order=>20
+,p_column_identifier=>'B'
+,p_column_label=>'Blood Type'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(41531279917785838519)
+,p_db_column_name=>'REQUEST_DATE'
+,p_display_order=>30
+,p_column_identifier=>'C'
+,p_column_label=>'Request Date'
+,p_column_type=>'DATE'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(41531280001842838520)
+,p_db_column_name=>'REQUESTSTATUS'
+,p_display_order=>40
+,p_column_identifier=>'D'
+,p_column_label=>'Requeststatus'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(41531280152899838521)
+,p_db_column_name=>'MEDICAL_CONDITION'
+,p_display_order=>50
+,p_column_identifier=>'E'
+,p_column_label=>'Medical Condition'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(41531280294773838522)
+,p_db_column_name=>'HOSPITAL_NAME'
+,p_display_order=>60
+,p_column_identifier=>'F'
+,p_column_label=>'Hospital Name'
+,p_column_type=>'STRING'
+,p_heading_alignment=>'LEFT'
+,p_use_as_row_header=>'N'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(41531280353313838523)
+,p_db_column_name=>'SIGN_UP_ID'
+,p_display_order=>70
+,p_column_identifier=>'G'
+,p_column_label=>'Sign Up Id'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(41531280417732838524)
+,p_db_column_name=>'SIGN_UP_USERNAME'
+,p_display_order=>80
+,p_column_identifier=>'H'
+,p_column_label=>'Sign Up Username'
+,p_column_type=>'STRING'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(41547090771222712544)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'415470908'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'REQUESTID:BLOOD_TYPE:REQUEST_DATE:REQUESTSTATUS:MEDICAL_CONDITION:HOSPITAL_NAME:SIGN_UP_ID:SIGN_UP_USERNAME'
+);
+wwv_flow_imp.component_end;
+end;
+/
