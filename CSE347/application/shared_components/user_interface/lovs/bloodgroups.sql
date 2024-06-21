@@ -1,0 +1,71 @@
+prompt --application/shared_components/user_interface/lovs/bloodgroups
+begin
+--   Manifest
+--     BLOODGROUPS
+--   Manifest End
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2024.05.31'
+,p_release=>'24.1.0'
+,p_default_workspace_id=>23218690882094214236
+,p_default_application_id=>172091
+,p_default_id_offset=>0
+,p_default_owner=>'WKSP_JUBAYERCSE302SUMMER23'
+);
+wwv_flow_imp_shared.create_list_of_values(
+ p_id=>wwv_flow_imp.id(16990246086720512830)
+,p_lov_name=>'BLOODGROUPS'
+,p_lov_query=>'.'||wwv_flow_imp.id(16990246086720512830)||'.'
+,p_location=>'STATIC'
+,p_version_scn=>1
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(16990246321496512831)
+,p_lov_disp_sequence=>1
+,p_lov_disp_value=>'A+'
+,p_lov_return_value=>'A+'
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(16990246744522512831)
+,p_lov_disp_sequence=>2
+,p_lov_disp_value=>'A-'
+,p_lov_return_value=>'A-'
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(16990247163760512831)
+,p_lov_disp_sequence=>3
+,p_lov_disp_value=>'B+'
+,p_lov_return_value=>'B+'
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(16990247525423512831)
+,p_lov_disp_sequence=>4
+,p_lov_disp_value=>'B-'
+,p_lov_return_value=>'B-'
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(16990247939465512831)
+,p_lov_disp_sequence=>5
+,p_lov_disp_value=>'AB+'
+,p_lov_return_value=>'AB+'
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(16990248325638512832)
+,p_lov_disp_sequence=>6
+,p_lov_disp_value=>'AB-'
+,p_lov_return_value=>'AB-'
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(16990248777279512832)
+,p_lov_disp_sequence=>7
+,p_lov_disp_value=>'O+'
+,p_lov_return_value=>'O+'
+);
+wwv_flow_imp_shared.create_static_lov_data(
+ p_id=>wwv_flow_imp.id(16990249126660512832)
+,p_lov_disp_sequence=>8
+,p_lov_disp_value=>'O-'
+,p_lov_return_value=>'O-'
+);
+wwv_flow_imp.component_end;
+end;
+/
